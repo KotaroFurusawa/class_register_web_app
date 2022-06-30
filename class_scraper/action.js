@@ -10,6 +10,7 @@ class screenAction {
             await this.page.goto(url, { waitUntil: 'networkidle2' });
         } catch (e) {
             this.logger.fatal(e);
+            this.logger.fatal('申請失敗：この申請からやり直してください');
             process.exit(1);
         }
     }
@@ -26,6 +27,7 @@ class screenAction {
         } catch (e) {
             var message = 'mouse_click_error:';
             this.logger.fatal(message + e);
+            this.logger.fatal('申請失敗：この申請からやり直してください');
             process.exit(1);
         }
     }
@@ -41,6 +43,7 @@ class screenAction {
         } catch (e) {
             var message = 'input_error:';
             this.logger.fatal(message + e);
+            this.logger.fatal('申請失敗：この申請からやり直してください');
             process.exit(1);
         }
     }
@@ -128,7 +131,10 @@ class screenAction {
 
             }
             if (!exist_flag) {
-                throw new Error(string + 'は存在しません');
+                await this.logger.fatal(string + 'は存在しません');
+                return false;
+            } else {
+                return true;
             }
         } catch (e) {
             var message = 'text_search_click_error:';

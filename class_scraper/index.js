@@ -29,8 +29,9 @@ exports.class_register = async (info, schedule, user) => {
             let class_room_name = await `${firm.TEXT_CHANGE[class_room[0]].ROOM_SELECT}-${class_room[1]}`; //使用教室名
             let time = await schedule.TIME;
 
+            await logger.info(`-----【申請${i}】申請開始----`);
             await action.page_goto(schedule_set.FORM_URL); //申請フォームへ遷移
-            await logger.info(`【申請${i}】フォームアクセス成功`);
+            await logger.info(`フォームアクセス成功`);
             await page.waitForTimeout(2000); //2秒待つ
 
             await action.xpath_type(xpath.CLUB_NAME, text.CLUB_NAME); //課外活動団体名入力
@@ -40,10 +41,16 @@ exports.class_register = async (info, schedule, user) => {
             await action.xpath_click(xpath.GUIDE_CONF); //「課外活動ガイドライン」と「使用可能施設一覧・申請方法」読んだ？
             await action.xpath_click(xpath.AVAILABILITY_CONF); //空き情報確認した？
 
-            await action.text_search_click(xpath.BUILDING_SET, building_name); //使用希望施設選択
+            if (await action.text_search_click(xpath.BUILDING_SET, building_name)) {
+                await logger.fatal(`フォーム送信失敗`);
+                continue;
+            }; //使用希望施設選択
 
             await page.waitForTimeout(1000); //1秒待つ
-            await action.text_search_click(xpath.CLASS_ROOM_SET, class_room_name); //使用希望施設選択
+            if (await action.text_search_click(xpath.CLASS_ROOM_SET, class_room_name)) {
+                await logger.fatal(`フォーム送信失敗`);
+                continue;
+            }; //使用希望施設選択
 
             await page.waitForTimeout(1000); //1秒待つ
             await action.xpath_type(xpath.DATE_INPUT, date); //日付入力
@@ -55,7 +62,7 @@ exports.class_register = async (info, schedule, user) => {
             await action.xpath_type(xpath.MAIL, text.MAIL); //メールアドレス入力
             await action.xpath_type(xpath.TEL, text.TEL); //電話番号入力
 
-            await logger.info(`【申請${i}】・日付: ${date}, 時刻: ${time}, 利用施設: ${class_room_name}`);
+            await logger.info(`・日付: ${date}, 時刻: ${time}, 利用施設: ${class_room_name}`);
 
             /*
             await Promise.all([
@@ -64,10 +71,11 @@ exports.class_register = async (info, schedule, user) => {
             ])
             */
 
-            await logger.info(`【申請${i}】フォーム送信成功`);
+            await logger.info(`フォーム送信成功`);
             i += 1;
         }
         await logger.info('一括申請実行_完了');
+        await logger.info('すべての処理が終わったので、「ホームに戻る」か「ログアウト」をクリックしてください');
     } catch (e) {
         await logger.fatal(e)
     } finally {
