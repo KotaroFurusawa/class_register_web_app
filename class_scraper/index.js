@@ -2,8 +2,7 @@ const puppeteer = require('puppeteer');
 const firm = require(__dirname + "/setting_data/_firm_data.json");
 
 exports.class_register = async (info, schedule, user) => {
-    const LAUNCH_OPTION = process.env.DYNO ? { args: ['--no-sandbox', '--disable-setuid-sandbox'] } : { headless: false };
-    const browser = await puppeteer.launch(LAUNCH_OPTION);
+    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     const page = await browser.newPage();
     await page.setExtraHTTPHeaders({
         'Accept-Language': 'ja-JP' //日本語版ページが読み込まれるようにする
