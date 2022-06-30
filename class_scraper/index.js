@@ -41,13 +41,13 @@ exports.class_register = async (info, schedule, user) => {
             await action.xpath_click(xpath.GUIDE_CONF); //「課外活動ガイドライン」と「使用可能施設一覧・申請方法」読んだ？
             await action.xpath_click(xpath.AVAILABILITY_CONF); //空き情報確認した？
 
-            if (await action.text_search_click(xpath.BUILDING_SET, building_name)) {
+            if (!await action.text_search_click(xpath.BUILDING_SET, building_name)) {
                 await logger.fatal(`フォーム送信失敗`);
                 continue;
             }; //使用希望施設選択
 
             await page.waitForTimeout(1000); //1秒待つ
-            if (await action.text_search_click(xpath.CLASS_ROOM_SET, class_room_name)) {
+            if (!await action.text_search_click(xpath.CLASS_ROOM_SET, class_room_name)) {
                 await logger.fatal(`フォーム送信失敗`);
                 continue;
             }; //使用希望施設選択
@@ -76,6 +76,7 @@ exports.class_register = async (info, schedule, user) => {
         }
         await logger.info('一括申請実行_完了');
         await logger.info('すべての処理が終わったので、「ホームに戻る」か「ログアウト」をクリックしてください');
+        await logger.info('質問等は管理者(twitter:@fugafuga255)までご連絡ください');
     } catch (e) {
         await logger.fatal(e)
     } finally {
