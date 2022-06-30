@@ -87,10 +87,6 @@ async function execute() {
     }
 }
 
-async function logout() {
-    window.location.href = URL + '/logout';
-}
-
 //規約の同意確認
 async function rule_agree_check(formElements) {
     let flg = true;
@@ -258,7 +254,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //リクエストの送信
     document.getElementById("execute").addEventListener("click", execute);
-
-    //ログアウト
-    document.getElementById("logout").addEventListener("click", logout);
 });

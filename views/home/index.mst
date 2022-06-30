@@ -8,6 +8,13 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script type="text/javascript">
+        function logout() {
+            window.onbeforeunload = null;
+            window.confirm("ログアウトしますか？");
+            window.location.href = URL + '/logout';
+        }
+    </script>
 </head>
 
 <body class="bg-dark">
@@ -17,7 +24,7 @@
                 <div class="col-md-8 offset-md-2">
                     <h2 class="fs-1 mb-5 text-center fw-bold">一括教室申請</h2>
                     <div class="mb-3 float-end">
-                        <input class="btn btn-primary"　id="logout" type="button" value="ログアウト">
+                        <input class="btn btn-primary"　id="log_out" type="button" value="ログアウト" onclick="logout()">
                     </div>
                     <br>
                     <form id="request_form" name="request_form" method="post" action="mail.php">
@@ -149,6 +156,5 @@
         </div>
     </div>
 </body>
-
-</html>
 <script src="js/home.js"></script>
+</html>

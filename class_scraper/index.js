@@ -28,7 +28,7 @@ exports.class_register = async (info, schedule, user) => {
             let class_room_name = await `${firm.TEXT_CHANGE[class_room[0]].ROOM_SELECT}-${class_room[1]}`; //使用教室名
             let time = await schedule.TIME;
 
-            await logger.info(`-----【申請日:${date}】申請開始----`);
+            await logger.info(`-----【申請:${schedule.DAY}日】申請開始----`);
             await action.page_goto(schedule_set.FORM_URL); //申請フォームへ遷移
             await logger.info(`フォームアクセス成功`);
             await page.waitForTimeout(2000); //2秒待つ

@@ -14,21 +14,26 @@
         const URL = location.protocol + '//' + location.host;
         fetch_log();
 
-        //ログアウト
-        document.getElementById("logout").addEventListener("click", logout);
-        //ホームに戻る
-        document.getElementById("back_home").addEventListener("click", back_home);
+        //リロード、ブラウザバックの警告
+        window.onbeforeunload = function (e) {
+            e.returnValue = "ページを離れようとしています。よろしいですか？";
+        }
 
-        async function logout() {
+        function logout() {
+            window.onbeforeunload = null;
+            window.confirm("ログアウトしますか？");
             window.location.href = URL + '/logout';
         }
-        async function back_home() {
+        function back_home() {
+            window.onbeforeunload = null;
+            window.confirm("ホームに戻りますか？");
             window.location.href = URL + '/home';
         }
 
         function fetch_log() {
             // ここに定期的に行なう処理を書く
             var xhr = new XMLHttpRequest();
+            window.onbeforeunload = null;
             xhr.open("GET", `${URL}/fetch_log?id=${id}`, true);
             xhr.onload = function (e) {
                 if (xhr.readyState === 4) {
@@ -44,7 +49,7 @@
             };
             xhr.send();
             // 1秒ごとに実行
-            window.setTimeout("fetch_log()", 5000);
+            window.setTimeout("fetch_log()", 3000);
         }
     </script>
 </head>
@@ -63,8 +68,8 @@
                     </div>
                     <div id="trance" class="mb-3">
                         <div class="d-flex justify-content-around m-2">
-                            <input class="btn btn-secondary" id="back_home" type="button" value="ホームに戻る" />
-                            <input class="btn btn-primary" id="logout" type="button" value=" ログアウト " />
+                            <input class="btn btn-secondary" id="back_home" type="button" value="ホームに戻る"  onclick="back_home()" />
+                            <input class="btn btn-primary" id="logout" type="button" value=" ログアウト " onclick="logout()" />
                         </div>
                     </div>
                 </div>
