@@ -3,6 +3,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const app = express();
 const mustacheExpress = require('mustache-express');
 const User = require('./models').Users;
