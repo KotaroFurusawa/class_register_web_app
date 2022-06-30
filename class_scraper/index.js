@@ -21,7 +21,6 @@ exports.class_register = async (info, schedule, user) => {
     await logger.start_log('一括申請実行_開始');
 
     try {
-        let i = 1;
         for (let schedule of schedule_list) {
             let class_room = await schedule.CLASS_ROOM.split("-");
             let date = await action.mk_date(schedule_set.YEAR, schedule_set.MONTH, schedule.DAY);
@@ -29,7 +28,7 @@ exports.class_register = async (info, schedule, user) => {
             let class_room_name = await `${firm.TEXT_CHANGE[class_room[0]].ROOM_SELECT}-${class_room[1]}`; //使用教室名
             let time = await schedule.TIME;
 
-            await logger.info(`-----【申請${i}】申請開始----`);
+            await logger.info(`-----【申請日:${date}】申請開始----`);
             await action.page_goto(schedule_set.FORM_URL); //申請フォームへ遷移
             await logger.info(`フォームアクセス成功`);
             await page.waitForTimeout(2000); //2秒待つ
@@ -72,7 +71,6 @@ exports.class_register = async (info, schedule, user) => {
             */
 
             await logger.info(`フォーム送信成功`);
-            i += 1;
         }
         await logger.info('一括申請実行_完了');
         await logger.info('すべての処理が終わったので、「ホームに戻る」か「ログアウト」をクリックしてください');

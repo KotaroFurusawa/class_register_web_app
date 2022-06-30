@@ -14,6 +14,18 @@
         const URL = location.protocol + '//' + location.host;
         fetch_log();
 
+        //ログアウト
+        document.getElementById("logout").addEventListener("click", logout);
+        //ホームに戻る
+        document.getElementById("back_home").addEventListener("click", back_home);
+
+        async function logout() {
+            window.location.href = URL + '/logout';
+        }
+        async function back_home() {
+            window.location.href = URL + '/home';
+        }
+
         function fetch_log() {
             // ここに定期的に行なう処理を書く
             var xhr = new XMLHttpRequest();
@@ -32,7 +44,7 @@
             };
             xhr.send();
             // 1秒ごとに実行
-            window.setTimeout("fetch_log()", 3000);
+            window.setTimeout("fetch_log()", 5000);
         }
     </script>
 </head>
@@ -48,6 +60,12 @@
                         <div id="console">
                         </div>
                         <br>
+                    </div>
+                    <div id="trance" class="mb-3">
+                        <div class="d-flex justify-content-around m-2">
+                            <input class="btn btn-secondary" id="back_home" type="button" value="ホームに戻る" />
+                            <input class="btn btn-primary" id="logout" type="button" value=" ログアウト " />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -16,6 +16,10 @@
             <div class="row bg-light text-dark py-5">
                 <div class="col-md-8 offset-md-2">
                     <h2 class="fs-1 mb-5 text-center fw-bold">一括教室申請</h2>
+                    <div class="mb-3 float-end">
+                        <input class="btn btn-primary"　id="logout" type="button" value="ログアウト">
+                    </div>
+                    <br>
                     <form id="request_form" name="request_form" method="post" action="mail.php">
                         <div class="mb-3">
                             <h2>◉申請者の情報(必須)</h2>

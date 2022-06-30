@@ -56,7 +56,7 @@ app.post('/execute', authMiddleware, async function (req, res) {
 })
 
 
-app.get('/fetch_log', (req, res) => {
+app.get('/fetch_log', authMiddleware, (req, res) => {
     let log = fs.readFileSync(__dirname + `/execute_log/log_${req.query.id}.txt`, 'utf8');
     res.send(log);
 });
@@ -104,9 +104,11 @@ app.post('/login',
 );
 
 //ログアウト実行
-app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/login');
+app.get('/logout', authMiddleware, function (req, res, next) {
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        res.redirect('/login');
+    });
 });
 
 // ログイン成功後のページ
