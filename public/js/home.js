@@ -11,6 +11,7 @@ const reg_exp = {//正規表現とエラーメッセージ
     "CLASS_ROOM": [/^(1|11|14|k)-/, "＊注意事項に従い、正しく入力してください"],
     "TIME": ["^([0-9]|1[0-9]|2[0-3]):[0-5][0-9]$", "＊注意事項に従い、正しく入力してください"]
 }
+const URL = location.protocol + '//' + location.host;
 
 function add_list() {
     //申請リストの追加
@@ -52,7 +53,7 @@ function delete_list() {
 
 
 //フォームの内容を検証し，リクエスト
-async function execute(e) {
+async function execute() {
     let data = {};
     let er_elem = await document.getElementById('request_error');
     //await e.preventDefault();//フォームの送信キャンセル
@@ -71,10 +72,16 @@ async function execute(e) {
         data.INFO = await club_data;//クラブ情報の追加
         data.REQUEST = await request_data;//申請情報の追加
 
-        await console.log(data);
         //postリクエスト
-        //
-        //
+        await fetch(URL + '/execute', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)  // リクエスト本文にJSON形式の文字列を設定
+        });
+        window.onbeforeunload = null;
+        window.location.href = URL + '/log_display';
     } else {
         er_elem.innerHTML = "＊１つ以上の入力エラーがあります。<br>修正し、再度送信ボタンを押下してください。";
     }

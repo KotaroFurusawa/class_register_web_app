@@ -23,27 +23,27 @@
                         <div id="club_info" class="club_info">
                             <div class="mb-3">
                                 <input type="text" id="club_name" class="form-control" name="club"
-                                    placeholder="団体名(正式名称)" required>
+                                    placeholder="団体名(正式名称)" value={{user.club_name}}>
                                 <p class="text-danger"></p>
                             </div>
                             <div class="mb-3">
                                 <input type="text" id="name" class="form-control" name="st_name"
-                                    placeholder="氏名(姓と名の間に全角スペース)" value="" required>
+                                    placeholder="氏名(姓と名の間に全角スペース)" value={{user.st_name}}>
                                 <p class="text-danger"></p>
                             </div>
                             <div class="mb-3">
                                 <input type="text" id="number" class="form-control" name="st_num"
-                                    placeholder="学生番号(半角英数字)" value="" required>
+                                    placeholder="学生番号(半角英数字)" value={{user.st_num}} >
                                 <p class="text-danger"></p>
                             </div>
                             <div class="mb-3">
                                 <input type="text" id="mail" class="form-control" name="mail" placeholder="メールアドレス"
-                                    value="" required>
+                                    value={{user.email}} >
                                 <p class="text-danger"></p>
                             </div>
                             <div class="mb-3">
                                 <input type="text" id="tel" class="form-control" name="tel" placeholder="電話番号(要ハイフン)"
-                                    value="" required>
+                                    value={{user.tell}} >
                                 <p class="text-danger"></p>
                             </div>
                         </div>
@@ -53,17 +53,17 @@
                         <div id="request_info" class="request_info">
                             <div class="mb-3">
                                 <input type="text" id="url" class="form-control" name="url" placeholder="フォームURL"
-                                    value="" required>
+                                    value="" >
                                 <p class="text-danger"></p>
                             </div>
                             <div class="mb-3">
                                 <input type="text" id="year" class="form-control" name="year" placeholder="申請年(数字のみで入力)"
-                                    value="" required>
+                                    value="" >
                                 <p class="text-danger"></p>
                             </div>
                             <div class="mb-3">
                                 <input type="text" id="month" class="form-control" name="month"
-                                    placeholder="申請月(数字のみで入力)" value="" required>
+                                    placeholder="申請月(数字のみで入力)" value="" >
                                 <p class="text-danger"></p>
                             </div>
                         </div>
@@ -87,12 +87,12 @@
                                         <div class="row">
                                             <div class="col-auto">
                                                 <input type="text" id="day_1" class="form-control" name="申請日"
-                                                    placeholder="申請日" value="" required>
+                                                    placeholder="申請日" value="" >
                                                 <p class="text-danger"></p>
                                             </div>
                                             <div class="col-auto">
                                                 <input type="text" id="class_1" class="form-control" name="教室名"
-                                                    placeholder="教室名" value="" required>
+                                                    placeholder="教室名" value="" >
                                                 <p class="text-danger"></p>
                                             </div>
                                         </div>
@@ -101,12 +101,12 @@
                                         <div class="row">
                                             <div class="col-auto">
                                                 <input type="text" id="start_1" class="form-control" name="開始時刻"
-                                                    placeholder="開始時刻(H:mm)" value="" required>
+                                                    placeholder="開始時刻(H:mm)" value="" >
                                                 <p class="text-danger"></p>
                                             </div>
                                             <div class="col-auto">
                                                 <input type="text" id="finish_1" class="form-control" name="終了時刻"
-                                                    placeholder="終了時刻(H:mm)" value="" required>
+                                                    placeholder="終了時刻(H:mm)" value="" >
                                                 <p class="text-danger"></p>
                                             </div>
                                         </div>
@@ -147,4 +147,4 @@
 </body>
 
 </html>
-<script src="js/sample.js"></script>
+<script src="js/home.js"></script>

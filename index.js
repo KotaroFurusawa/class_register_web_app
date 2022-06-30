@@ -1,12 +1,12 @@
 const passport = require('./auth');
 const session = require('express-session');
 const flash = require('connect-flash');
-const puppeteer = require('puppeteer');
 const express = require('express');
 const path = require('path');
 const app = express();
 const mustacheExpress = require('mustache-express');
-const urls = ['https://www.google.com/', 'https://twitter.com/', 'https://5ch.net/']
+const User = require('./models').Users;
+const class_scraper = require(__dirname + "/class_scraper/index.js");
 
 app.set('port', (process.env.PORT || 3000));
 
@@ -21,6 +21,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.json())
 
 app.engine('mst', mustacheExpress());
 app.set('view engine', 'mst');
@@ -41,20 +42,43 @@ const authMiddleware = (req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.get('/execute', authMiddleware, function (request, response) {
-    (async () => {
-        const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-        const page = await browser.newPage();
-        await page.goto(urls[Math.floor(Math.random() * 3)]);
+app.post('/execute', authMiddleware, async function (req, res) {
+    let user = req.user;
+    let info = await req.body.INFO;
+    let schedule = await req.body.REQUEST;
+    res.send("ok");
 
-        await page.screenshot({ path: 'public/img/sample.png' });
+    //dbを更新する
+    await club_info_update(user, info);
+    //puppeteerの処理
+    await class_scraper.class_register(info, schedule, user);
+})
 
-        await browser.close();
 
-        await response.redirect('/home');
-    })();
+app.get('/fetch_log', (req, res) => {
+    let log = fs.readFileSync(__dirname + `/execute_log/log_${req.query.id}.txt`, 'utf8');
+    res.send(log);
 });
 
+//クラブ情報更新
+async function club_info_update(user, info_data) {
+    await User.update({
+        club_name: info_data.CLUB_NAME,
+        st_name: info_data.REPRESENT_NAME,
+        st_num: info_data.STUDENT_NUMBER,
+        email: info_data.MAIL,
+        tell: info_data.TEL
+    }, {
+        where: {
+            club_id: user.club_id
+        }
+    })
+}
+
+// ログ
+app.get('/log_display', authMiddleware, (req, res) => {
+    res.render('log_display/index', { id: req.user.id });
+});
 
 app.get('/', function (request, response) {
     response.redirect('/home');
@@ -86,11 +110,10 @@ app.get('/logout', (req, res) => {
 
 // ログイン成功後のページ
 app.get('/home', authMiddleware, (req, res) => {
-    res.render('home/index');
+    let user = req.user;
+    res.render('home/index', { user: user });
 });
 
 app.listen(app.get('port'), function () {
     console.log("Node app is running at localhost:" + app.get('port'))
 });
-
-//サニタイズ化忘れずに！！！

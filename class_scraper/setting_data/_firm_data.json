@@ -1,0 +1,57 @@
+{
+    "//": "このファイルはソフトウェア製作者が設定/更新すること",
+    "OPTION": {
+        "headless": true,
+        "slowMo": 80,
+        "defaultViewport": {
+            "width": 1000,
+            "height": 1000
+        },
+        "args": [
+            "--lang=ja"
+        ]
+    },
+    "TEXT_CHANGE": {
+        "1": {
+            "NAME": "1号館教室",
+            "ROOM_SELECT": "1"
+        },
+        "11": {
+            "NAME": "11号館教室",
+            "ROOM_SELECT": "11"
+        },
+        "14": {
+            "NAME": "14号館教室",
+            "ROOM_SELECT": "14"
+        },
+        "k": {
+            "NAME": "紀尾井坂ビル教室",
+            "ROOM_SELECT": "紀"
+        }
+    },
+    "XPATH": {
+        "CLUB_NAME": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[1]/div/div[3]/div/div/input",
+        "REPRESENT_NAME": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[2]/div/div[3]/div/div/input",
+        "STUDENT_NUMBER": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[3]/div/div[3]/div/div/input",
+        "GUIDE_CONF": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[4]/div/div[3]/div/div/div/label/input",
+        "AVAILABILITY_CONF": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[5]/div/div[3]/div/div/div/label/input",
+        "DATE_INPUT": "//*[@id=\"form-container\"]/div/div/div[1]/div/div[1]/div[2]/div[2]/div[8]/div/div[3]/div/div/input[1]",
+        "DATE_ICON": "//*[@id=\"form-container\"]/div/div/div[1]/div/div[1]/div[2]/div[2]/div[8]/div/div[3]/div/div/button/div",
+        "TIME": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[9]/div/div[3]/div/div/input",
+        "OUT_CAMPUS": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[10]/div/div[3]/div/div[2]/div/label/input",
+        "NOTICES": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[11]/div/div[3]/div/div/input",
+        "MAIL": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[12]/div/div[3]/div/div/input",
+        "TEL": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[13]/div/div[3]/div/div/input",
+        "SUBMIT": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[3]/div[1]/button",
+        "BUILDING_SET": {
+            "LIST": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[6]/div/div[3]/div",
+            "TEXT": "/div/label/span/span",
+            "SELECT": "/div/label/input"
+        },
+        "CLASS_ROOM_SET": {
+            "LIST": "//div[@id='content-root']/div/div/div/div[1]/div/div[1]/div[2]/div[2]/div[7]/div/div[3]/div",
+            "TEXT": "/div/label/span/span",
+            "SELECT": "/div/label/input"
+        }
+    }
+}
