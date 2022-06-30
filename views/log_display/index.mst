@@ -12,7 +12,7 @@
         // 最初の実行
         let id = {{id}};
         const URL = location.protocol + '//' + location.host;
-        //fetch_log();
+        fetch_log();
 
         function fetch_log() {
             // ここに定期的に行なう処理を書く
