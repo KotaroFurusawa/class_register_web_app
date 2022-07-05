@@ -6,13 +6,13 @@ module.exports = {
     const now = new Date();
     return queryInterface.bulkInsert('Users', [
       {
-        club_id: "1258",
-        club_name: "上智大学エレクトロニクス研究部",
+        club_id: "0005",
+        club_name: "",
         st_name: "",
         st_num: "",
         email: "",
         tell: "",
-        password: bcrypt.hashSync('207879', bcrypt.genSaltSync(8)),
+        password: bcrypt.hashSync('ess2022', bcrypt.genSaltSync(8)),
         createdAt: new Date(),
         updatedAt: new Date()
       },
