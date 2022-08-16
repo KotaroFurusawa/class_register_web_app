@@ -7,7 +7,7 @@
 - Sequeliz
 - PostgreSQL
 - Bootstrap v5.0
-- puppeteer
+- Puppeteer
 
 ## 仕様
 ### ログイン
