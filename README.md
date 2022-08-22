@@ -10,6 +10,7 @@ https://sophiaclassregister.herokuapp.com/
 - PostgreSQL
 - Bootstrap v5.0
 - Puppeteer
+- Heroku
 
 ## 仕様
 ### ログイン
